@@ -6,7 +6,7 @@
             <field name="name">Chat Bot</field>
             <field name="company_id" ref="base.main_company"/>
             <field name="email">chatbot@test.com</field>
-            <field name="active" eval="False"/>
+            <field name="active" eval="True"/>
         </record>
         <!-- Bot User -->
         <record id="test_prec.bot_user" model="res.users">

@@ -25,3 +25,20 @@ class ChatBot(models.AbstractModel):
     def _get_answer(self, record, body, values, command):
         return "you said: " + body + " and I am a bot"
 
+    @api.model
+    def search_odoobot_channel(self):
+        odoobot_partner_id = self.env['ir.model.data']._xmlid_to_res_id("test_prec.bot_partner")
+        odoobot_name = self.env['res.partner'].browse(odoobot_partner_id).name
+        current_user = self.env.user.partner_id
+        bot_channels = self.env['discuss.channel'].search([('channel_partner_ids','in', [odoobot_partner_id]),('channel_type','=','chat')])
+        channel = bot_channels.filtered(lambda c: current_user in c.channel_partner_ids)
+        if not channel:
+            channel = self.env['discuss.channel'].create({
+                'name': '#{},{}'.format(odoobot_name, current_user.name),
+                'channel_type': 'chat',
+                'channel_partner_ids': [(4, odoobot_partner_id), (4, current_user.id)]
+            })
+        return channel.id
+
+
+

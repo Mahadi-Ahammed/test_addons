@@ -16,6 +16,8 @@
             'test_prec/static/src/css/map_view_style.scss',
             'test_prec/static/src/js/map_view_widget.js',
             'test_prec/static/src/xml/map_view_template.xml',
+            'test_prec/static/src/xml/chatbot_systray.xml',
+            'test_prec/static/src/js/chatbot_systray.js',
         ],
     },
     'depends': ['base', 'web', 'mail'],
